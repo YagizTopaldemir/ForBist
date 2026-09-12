@@ -3,7 +3,9 @@ const cors = require("cors");
 const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const cookieParser = require("cookie-parser");
+const OpenAI = require("openai");
 
+const aiRoutes = require("./routes/aiRoutes");
 const authRoutes = require("./routes/authRoutes");
 const db = require("./config/db");
 const ipoRoutes = require("./routes/ipoRoutes");
@@ -11,6 +13,7 @@ const portfolioRoutes = require("./routes/portfolioRoutes");
 const transactionRoutes = require("./routes/transactionRoutes");
 const marketRoutes = require("./routes/marketRoutes");
 const app = express();
+
 
 app.use(helmet());
 
@@ -20,7 +23,9 @@ app.use(
     credentials: true,
   })
 );
-
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 app.use(cookieParser());
 
 app.use(express.json({ limit: "1mb" }));
@@ -46,5 +51,7 @@ app.use("/api/portfolio", portfolioRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/ipos", ipoRoutes);
 app.use("/api/transactions", transactionRoutes);
+app.use("/api/ai", aiRoutes);
+
 
 module.exports = app;

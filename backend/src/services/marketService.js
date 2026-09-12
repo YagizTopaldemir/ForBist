@@ -336,16 +336,28 @@ const getStockPrices = async (symbols) => {
 
         const result =
           JSON.parse(responseText);
+console.log("OANOR DATA:", result.data);
+     const close = Number(result.data.close);
+const change = Number(result.data.change);
+const changePercent = Number(result.data.change_percent);
 
-        const price = {
-          currentPrice: Number(
-            result.data.close
-          ),
-          changePercent: Number(
-            result.data.change_pct || 0
-          ),
-        };
+const previousClose =
+  Number.isFinite(close) && Number.isFinite(change)
+    ? close - change
+    : null;
 
+const price = {
+  price: close,
+  previousClose,
+  change,
+  changePercent,
+
+  average: Number(result.data.average),
+  high: Number(result.data.high),
+  low: Number(result.data.low),
+  volume: Number(result.data.volume_try),
+  marketCap: Number(result.data.market_cap_try),
+};
         stockCache.set(symbol, {
           data: price,
           timestamp: Date.now(),
