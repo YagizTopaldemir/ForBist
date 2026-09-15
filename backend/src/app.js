@@ -12,6 +12,7 @@ const ipoRoutes = require("./routes/ipoRoutes");
 const portfolioRoutes = require("./routes/portfolioRoutes");
 const transactionRoutes = require("./routes/transactionRoutes");
 const marketRoutes = require("./routes/marketRoutes");
+const newsRoutes = require("./routes/newsRoutes");
 const app = express();
 
 
@@ -47,6 +48,7 @@ const authLimiter = rateLimit({
 app.use("/api/auth/login", authLimiter);
 app.use("/api", apiLimiter);
 app.use("/api/market", marketRoutes);
+app.use("/api/news", newsRoutes);
 app.use("/api/portfolio", portfolioRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/ipos", ipoRoutes);

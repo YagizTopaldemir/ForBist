@@ -9,6 +9,7 @@ import {
 import Dashboard from "./pages/Dashboard";
 import Portfolio from "./pages/Portfolio";
 import Ipo from "./pages/Ipo";
+import News from "./pages/News";
 import AiAssistant from "./pages/AiAssistant";
 import Transactions from "./pages/Transactions";
 import Settings from "./pages/Settings";
@@ -101,6 +102,15 @@ export default function App() {
           element={
             <ProtectedPage>
               <Ipo />
+            </ProtectedPage>
+          }
+        />
+
+        <Route
+          path="/news"
+          element={
+            <ProtectedPage>
+              <News />
             </ProtectedPage>
           }
         />

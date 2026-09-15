@@ -10,8 +10,9 @@ const {
 } = require("../services/marketService");
 
 
+ 
 const getPortfolio = async (req, res) => {
-  try {
+     try {
       console.log("YENI GET PORTFOLIO CALISTI");
     const userId = req.user.id;
 

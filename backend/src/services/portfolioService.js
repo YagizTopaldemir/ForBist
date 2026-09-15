@@ -27,7 +27,7 @@ const getPortfolioSummary = async (
     const marketData = prices[stock.symbol];
 
     const currentPrice =
-      marketData?.currentPrice || 0;
+  Number(marketData?.price) || 0;
 
     const dailyChangePercent =
       marketData?.changePercent || 0;

@@ -5,6 +5,7 @@ import {
   Briefcase,
   Bot,
   Building2,
+  Newspaper,
   ArrowLeftRight,
   Settings,
   Menu,
@@ -33,6 +34,11 @@ const menuItems = [
     name: "Halka Arzlar",
     path: "/ipo",
     icon: Building2,
+  },
+  {
+    name: "Haberler",
+    path: "/news",
+    icon: Newspaper,
   },
   {
     name: "İşlemler",

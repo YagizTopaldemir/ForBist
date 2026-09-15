@@ -319,10 +319,14 @@ export default function Landing() {
                         </p>
 
                         <div className="mt-6 flex items-center justify-center">
-                          <div className="relative h-32 w-32 rounded-full border-[20px] border-violet-500">
-                            <div className="absolute -right-5 top-0 h-full w-20 -rotate-45 rounded-full border-[20px] border-indigo-400 border-l-transparent border-b-transparent" />
-
-                            <div className="absolute inset-0 flex items-center justify-center">
+                          <div
+                            className="relative h-32 w-32 rounded-full"
+                            style={{
+                              background:
+                                "conic-gradient(#8B5CF6 0deg 216deg, #818CF8 216deg 360deg)",
+                            }}
+                          >
+                            <div className="absolute inset-3.5 flex items-center justify-center rounded-full bg-[#0D0D14]">
                               <div className="text-center">
                                 <p className="text-xs font-medium">8</p>
                                 <p className="text-[9px] text-gray-600">

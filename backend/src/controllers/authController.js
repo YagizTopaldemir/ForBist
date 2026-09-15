@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const { z } = require("zod");
 
 const db = require("../config/db");
+const crypto = require("crypto");
 
 const registerSchema = z
   .object({
