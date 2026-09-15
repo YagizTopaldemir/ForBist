@@ -347,7 +347,7 @@ export default function Ipo() {
                       <a
                         href={ipo.url}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         className="rounded-lg p-2 text-gray-500 transition hover:bg-white/5 hover:text-white"
                       >
                         <ArrowUpRight size={17} />

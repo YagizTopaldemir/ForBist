@@ -25,6 +25,13 @@ router.post(
         });
       }
 
+      if (message.length > 2000) {
+        return res.status(400).json({
+          success: false,
+          message: "Mesaj çok uzun (en fazla 2000 karakter).",
+        });
+      }
+
       const response = await chatWithAI(
         message.trim(),
         req.user.id

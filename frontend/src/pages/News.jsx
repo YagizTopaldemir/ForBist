@@ -184,7 +184,7 @@ export default function News() {
                           key={item.link}
                           href={item.link}
                           target="_blank"
-                          rel="noreferrer"
+                          rel="noopener noreferrer"
                           className="group flex flex-col overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.02] transition duration-300 hover:border-violet-500/20 hover:bg-violet-500/[0.03]"
                         >
                           <div className="aspect-[16/9] w-full overflow-hidden bg-white/[0.03]">

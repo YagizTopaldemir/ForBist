@@ -269,6 +269,7 @@ export default function AiAssistant() {
                     }
                     placeholder="Portföyün hakkında bir şey sor..."
                     disabled={loading}
+                    maxLength={2000}
                     className="min-w-0 flex-1 bg-transparent px-1 text-sm text-gray-200 outline-none placeholder:text-gray-600 disabled:opacity-50"
                   />
 

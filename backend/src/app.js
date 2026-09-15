@@ -15,12 +15,15 @@ const marketRoutes = require("./routes/marketRoutes");
 const newsRoutes = require("./routes/newsRoutes");
 const app = express();
 
+// Reverse proxy'nin arkasında çalışırken gerçek istemci IP'sini
+// ve HTTPS durumunu doğru okumak için (rate limit + secure cookie).
+app.set("trust proxy", 1);
 
 app.use(helmet());
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.FRONTEND_ORIGIN || "http://localhost:5173",
     credentials: true,
   })
 );
@@ -45,7 +48,22 @@ const authLimiter = rateLimit({
   legacyHeaders: false,
 });
 
+// AI sohbeti her istekte OpenAI çağrısı yapıyor (maliyetli),
+// bu yüzden genel limitten daha sıkı bir limit uygulanıyor.
+const aiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    success: false,
+    message: "Çok fazla istek gönderildi. Lütfen daha sonra tekrar deneyin.",
+  },
+});
+
 app.use("/api/auth/login", authLimiter);
+app.use("/api/auth/register", authLimiter);
+app.use("/api/ai", aiLimiter);
 app.use("/api", apiLimiter);
 app.use("/api/market", marketRoutes);
 app.use("/api/news", newsRoutes);

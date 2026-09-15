@@ -32,6 +32,18 @@ const isWithinTodayOrYesterday = (pubDate) => {
   return date >= startOfYesterday && date <= now;
 };
 
+const isSafeHttpUrl = (value) => {
+  if (!value) return false;
+
+  try {
+    const parsed = new URL(value);
+
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch {
+    return false;
+  }
+};
+
 const cleanText = (raw) => {
   if (!raw) return "";
 
@@ -100,7 +112,13 @@ const parseFeed = (xml, source) => {
 
     if (!title || !link || !pubDate) return;
 
+    // RSS kaynağı bozuk/kötü niyetli bir link verirse
+    // (ör. javascript:) bunu asla frontend'e taşımıyoruz.
+    if (!isSafeHttpUrl(link)) return;
+
     if (!isWithinTodayOrYesterday(pubDate)) return;
+
+    const image = extractImage($, item);
 
     items.push({
       title,
@@ -108,7 +126,7 @@ const parseFeed = (xml, source) => {
       summary: description.slice(0, 200),
       source,
       publishedAt: new Date(pubDate).toISOString(),
-      image: extractImage($, item),
+      image: isSafeHttpUrl(image) ? image : null,
     });
   });
 
